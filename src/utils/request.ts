@@ -1,6 +1,6 @@
 // import type { AxiosInstance, AxiosRequestConfig } from "axios"
-import axios from "axios";
-import { ElMessageBox, ElMessage } from "element-plus";
+import axios from 'axios';
+import { ElMessageBox, ElMessage } from 'element-plus';
 
 const service = axios.create({
   baseURL: process.env.VUE_APP_BASE_API, // url = base url + request url
@@ -46,8 +46,8 @@ service.interceptors.response.use(
     // if the custom code is not 20000, it is judged as an error.
     if (res.code !== 200) {
       ElMessage({
-        message: res.message || "Error",
-        type: "error",
+        message: res.message || 'Error',
+        type: 'error',
         duration: 5 * 1000,
       });
 
@@ -55,12 +55,12 @@ service.interceptors.response.use(
       if (res.code === 50008 || res.code === 50012 || res.code === 50014) {
         // to re-login
         ElMessageBox.confirm(
-          "You have been logged out, you can cancel to stay on this page, or log in again",
-          "Confirm logout",
+          'You have been logged out, you can cancel to stay on this page, or log in again',
+          'Confirm logout',
           {
-            confirmButtonText: "Re-Login",
-            cancelButtonText: "Cancel",
-            type: "warning",
+            confirmButtonText: 'Re-Login',
+            cancelButtonText: 'Cancel',
+            type: 'warning',
           }
         ).then(() => {
           //   store.dispatch("user/resetToken").then(() => {
@@ -68,16 +68,16 @@ service.interceptors.response.use(
           //   });
         });
       }
-      return Promise.reject(new Error(res.message || "Error"));
+      return Promise.reject(new Error(res.message || 'Error'));
     } else {
       return res;
     }
   },
   (error) => {
-    console.log("err" + error); // for debug
+    console.log('err' + error); // for debug
     ElMessage({
       message: error.message,
-      type: "error",
+      type: 'error',
       duration: 5 * 1000,
     });
     return Promise.reject(error);

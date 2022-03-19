@@ -14,8 +14,8 @@
 </template>
 
 <script lang="ts" setup>
-import { reactive, toRefs } from "vue";
-import { getMusicSearch } from "@/api/user";
+import { reactive, toRefs } from 'vue';
+import { getMusicSearch } from '@/api/user';
 
 const state = reactive({
   env: process.env.NODE_ENV,
@@ -23,7 +23,7 @@ const state = reactive({
 const { env } = toRefs(state);
 
 const search = async () => {
-  const res = await getMusicSearch({ keywords: "海阔天空" });
+  const res = await getMusicSearch({ keywords: '海阔天空' });
   console.log(7733, res);
 };
 </script>
