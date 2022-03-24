@@ -8,7 +8,7 @@
 -->
 <template>
   <div class="app-container">
-    <el-card class>
+    <el-card>
       <el-form ref="ruleFormRef" :model="ruleForm" :rules="rules" label-width="120px" class="demo-ruleForm">
         <el-form-item label="Activity name" prop="name">
           <el-input v-model="ruleForm.username" />
