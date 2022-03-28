@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2022-03-19 11:23:29
- * @LastEditTime: 2022-03-19 13:25:12
+ * @LastEditTime: 2022-03-28 11:36:16
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: \v3-pro\src\api\user.ts
@@ -16,6 +16,10 @@ interface cellphone {
   phone: string | number;
   password: string;
 }
+// interface RequestType {
+//   code: number;
+//   result: any;
+// }
 
 export function getMusicSearch(query: search) {
   return request({
@@ -25,7 +29,7 @@ export function getMusicSearch(query: search) {
   });
 }
 
-export function getLoginCellphone(query: cellphone) {
+export function loginByPhone(query: cellphone) {
   return request({
     url: 'login/cellphone',
     method: 'get',
