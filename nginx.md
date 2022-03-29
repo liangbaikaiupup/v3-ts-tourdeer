@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2022-03-22 08:34:26
- * @LastEditTime: 2022-03-22 08:34:27
+ * @LastEditTime: 2022-03-28 13:41:47
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: \v3-ts-tourdeer\nginx.md
@@ -143,4 +143,12 @@ http {
 　　　　　　proxy_pass http://localhost:20002;
 　　　　}
 　　}
+    #网易云音乐api部署Vercel
+    server {
+		listen 8081;
+		server_name localhost;
+		location / {
+			proxy_pass https://music-two-gamma.vercel.app;
+		}
+	}
 }

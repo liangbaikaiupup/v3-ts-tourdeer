@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2022-03-19 13:58:13
- * @LastEditTime: 2022-03-24 10:53:02
+ * @LastEditTime: 2022-03-28 13:52:47
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: \v3-ts-tourdeer\src\router\index.ts
@@ -15,19 +15,7 @@ const routes: Array<RouteRecordRaw> = [
     name: 'home',
     component: () => import(/* webpackChunkName: "about" */ '../views/HomeView.vue'),
   },
-  {
-    path: '/login',
-    name: 'Login',
-    component: () => import('../views/login/index.vue'),
-  },
-  {
-    path: '/about',
-    name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue'),
-  },
+
   {
     path: '/login',
     name: 'login',
