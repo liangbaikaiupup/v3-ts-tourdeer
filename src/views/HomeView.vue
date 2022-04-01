@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2022-03-19 10:10:42
- * @LastEditTime: 2022-03-29 09:50:37
+ * @LastEditTime: 2022-04-01 13:29:52
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: \v3-pro\src\views\HomeView.vue
@@ -33,18 +33,19 @@
       </el-col>
     </el-row>
   </el-card>
+  <process-toast v-if="show" />
 </template>
 
 <script lang="ts" setup>
-import { reactive, toRefs } from 'vue';
+import { reactive, toRefs, ref } from 'vue';
 import { getMusicSearch } from '@/api/user';
-// import { useRouter } from 'vue-router';
 import { useUserStore } from '@/store';
 import { computed } from '@vue/reactivity';
 import { storeToRefs } from 'pinia';
 import { ElMessage, ElMessageBox } from 'element-plus';
+import { downloadFile } from '@/utils/index';
+import ProcessToast from '@/components/process/index.vue';
 
-// const router = useRouter();
 const userStore = useUserStore();
 const { name, age } = storeToRefs(userStore);
 const job = computed(() => {
@@ -90,6 +91,12 @@ const state = reactive({
       value: `webpack vue`,
       methods: undefined,
     },
+    {
+      name: 'file-saver ^2.0.5',
+      imgUrl: 'https://img.cdn.sugarat.top/mdImg/MTU3OTM2ODc3OTM4Nw==579368779387',
+      value: `文件下载`,
+      methods: 'downlaodFile',
+    },
   ],
 });
 const { tableData } = toRefs(state);
@@ -105,6 +112,9 @@ function viewDetails(event: string | undefined) {
       break;
     case 'search':
       search();
+      break;
+    case 'downlaodFile':
+      downlaodFile();
       break;
     default:
       break;
@@ -123,11 +133,28 @@ const search = async () => {
 };
 
 const login = () => {
-  userStore.login({ phone: '18858475283', password: 'ni123456' });
+  userStore.login({ phone: '18858475283', password: '1qaz2wsx' });
 };
+
+const show = ref(false);
+function downlaodFile() {
+  show.value = true;
+
+  // https://xlm-ibc.oss-cn-hangzhou.aliyuncs.com/excel/1648608378195-.xlsx?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20220330T025555Z&X-Amz-SignedHeaders=host&X-Amz-Expires=86399&X-Amz-Credential=LTAI5t6cqnectdT5zbhrN6eb%2F20220330%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=b5e940542ff892be5bf345b06cee71c7c7e2d453c1ee40b5e121a58cdcbbb9b2
+  // https://img.cdn.sugarat.top/mdImg/MTYyMzA3NjA4NDQ4NA==desktop.jpg
+  downloadFile(
+    'https://xlm-ibc.oss-cn-hangzhou.aliyuncs.com/excel/1648608378195-.xlsx?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20220330T025555Z&X-Amz-SignedHeaders=host&X-Amz-Expires=86399&X-Amz-Credential=LTAI5t6cqnectdT5zbhrN6eb%2F20220330%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=b5e940542ff892be5bf345b06cee71c7c7e2d453c1ee40b5e121a58cdcbbb9b2',
+    '20220330.xlsx'
+  );
+}
 </script>
 <style lang="scss" scoped>
 .s-table-column-img {
   width: 100px;
+  // min-height: 98px;
+  transition: all ease-in-out 0.3s;
+  &:hover {
+    transform: scale(1.1);
+  }
 }
 </style>

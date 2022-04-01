@@ -1,3 +1,11 @@
+/*
+ * @Author: your name
+ * @Date: 2022-03-19 13:58:13
+ * @LastEditTime: 2022-03-30 10:31:40
+ * @LastEditors: your name
+ * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+ * @FilePath: \v3-ts-tourdeer\src\utils\request.ts
+ */
 // import type { AxiosInstance, AxiosRequestConfig } from "axios"
 import axios from 'axios';
 import { ElMessageBox, ElMessage } from 'element-plus';
