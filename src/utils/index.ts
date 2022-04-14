@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2022-03-19 17:00:32
- * @LastEditTime: 2022-04-01 11:25:00
+ * @LastEditTime: 2022-04-13 16:44:18
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: \v3-ts-tourdeer\src\utils\index.ts
@@ -12,6 +12,7 @@ import { useProcessStore } from '@/store';
 const useProcess = useProcessStore();
 
 export function downloadFile(url: any, name?: any, opts?: any) {
+  useProcess.UPDATE_PROCESS('0');
   const xhr = new XMLHttpRequest();
   xhr.open('GET', url);
   xhr.responseType = 'blob';

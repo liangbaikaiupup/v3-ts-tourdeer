@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2022-03-19 10:10:42
- * @LastEditTime: 2022-04-01 13:29:52
+ * @LastEditTime: 2022-04-13 16:28:31
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: \v3-pro\src\views\HomeView.vue
@@ -33,7 +33,7 @@
       </el-col>
     </el-row>
   </el-card>
-  <process-toast v-if="show" />
+  <process-toast ref="processToastRef" />
 </template>
 
 <script lang="ts" setup>
@@ -43,8 +43,9 @@ import { useUserStore } from '@/store';
 import { computed } from '@vue/reactivity';
 import { storeToRefs } from 'pinia';
 import { ElMessage, ElMessageBox } from 'element-plus';
-import { downloadFile } from '@/utils/index';
+// import { downloadFile } from '@/utils/index';
 import ProcessToast from '@/components/process/index.vue';
+import router from '@/router';
 
 const userStore = useUserStore();
 const { name, age } = storeToRefs(userStore);
@@ -97,6 +98,18 @@ const state = reactive({
       value: `文件下载`,
       methods: 'downlaodFile',
     },
+    {
+      name: '掘金',
+      imgUrl: require('@/assets/images/a082371acdc401a53ac672a94829dab7.jpeg'),
+      value: `JavaScript`,
+      methods: 'practice',
+    },
+    {
+      name: '重定向',
+      imgUrl: require('@/assets/images/dda0386969d5987a84df705e69e1ba2b.jpeg'),
+      value: `重定向`,
+      methods: 'redirect',
+    },
   ],
 });
 const { tableData } = toRefs(state);
@@ -116,6 +129,12 @@ function viewDetails(event: string | undefined) {
     case 'downlaodFile':
       downlaodFile();
       break;
+    case 'practice':
+      practice();
+      break;
+    case 'redirect':
+      redirect();
+      break;
     default:
       break;
   }
@@ -133,19 +152,23 @@ const search = async () => {
 };
 
 const login = () => {
-  userStore.login({ phone: '18858475283', password: '1qaz2wsx' });
+  userStore.login({ phone: '18858475283', password: '123456' });
 };
 
-const show = ref(false);
+const processToastRef: any = ref<null | HTMLElement>(null);
 function downlaodFile() {
-  show.value = true;
-
-  // https://xlm-ibc.oss-cn-hangzhou.aliyuncs.com/excel/1648608378195-.xlsx?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20220330T025555Z&X-Amz-SignedHeaders=host&X-Amz-Expires=86399&X-Amz-Credential=LTAI5t6cqnectdT5zbhrN6eb%2F20220330%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=b5e940542ff892be5bf345b06cee71c7c7e2d453c1ee40b5e121a58cdcbbb9b2
-  // https://img.cdn.sugarat.top/mdImg/MTYyMzA3NjA4NDQ4NA==desktop.jpg
-  downloadFile(
-    'https://xlm-ibc.oss-cn-hangzhou.aliyuncs.com/excel/1648608378195-.xlsx?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20220330T025555Z&X-Amz-SignedHeaders=host&X-Amz-Expires=86399&X-Amz-Credential=LTAI5t6cqnectdT5zbhrN6eb%2F20220330%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=b5e940542ff892be5bf345b06cee71c7c7e2d453c1ee40b5e121a58cdcbbb9b2',
-    '20220330.xlsx'
+  processToastRef.value.download(
+    'https://xlm-ibc.oss-cn-hangzhou.aliyuncs.com/excel/1648608378195-.xlsx?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20220330T025555Z&X-Amz-SignedHeaders=host&X-Amz-Expires=86399&X-Amz-Credential=LTAI5t6cqnectdT5zbhrN6eb%2F20220330%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=b5e940542ff892be5bf345b06cee71c7c7e2d453c1ee40b5e121a58cdcbbb9b2'
   );
+}
+
+function practice() {
+  router.push({ name: 'juejin', params: { id: '202004121402', title: '稀土掘金' } });
+  // router.push({ path: '/juejin', query: { id: '202004121402', title: '稀土掘金' } });
+}
+
+function redirect() {
+  router.push({ name: 'redirect', params: { path: 'juejin' } });
 }
 </script>
 <style lang="scss" scoped>
@@ -153,6 +176,7 @@ function downlaodFile() {
   width: 100px;
   // min-height: 98px;
   transition: all ease-in-out 0.3s;
+
   &:hover {
     transform: scale(1.1);
   }
