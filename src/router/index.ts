@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2022-03-19 13:58:13
- * @LastEditTime: 2022-04-13 16:15:51
+ * @LastEditTime: 2022-04-16 16:53:12
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: \v3-ts-tourdeer\src\router\index.ts
@@ -49,6 +49,19 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import('@/views/jue-jin/index.vue'),
         name: 'juejin',
         meta: { title: '掘金' },
+      },
+    ],
+  },
+  {
+    path: '/guide',
+    component: Layout,
+    redirect: '/guide/index',
+    children: [
+      {
+        path: 'index',
+        component: () => import('@/views/guide/index.vue'),
+        name: 'Guide',
+        meta: { title: '指南' },
       },
     ],
   },
