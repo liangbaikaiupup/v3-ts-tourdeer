@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2022-03-19 13:58:13
- * @LastEditTime: 2022-04-16 16:53:12
+ * @LastEditTime: 2022-04-18 10:48:29
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: \v3-ts-tourdeer\src\router\index.ts
@@ -28,13 +28,26 @@ const routes: Array<RouteRecordRaw> = [
 
   {
     path: '/redirect',
-
     component: Layout,
     children: [
       {
         name: 'redirect',
         path: '/redirect/:path(.*)',
         component: () => import('@/views/redirect/index.vue'),
+      },
+    ],
+  },
+
+  {
+    path: '/',
+    component: Layout,
+    redirect: '/dashboard',
+    children: [
+      {
+        path: 'dashboard',
+        component: () => import('@/views/dashboard/index.vue'),
+        name: 'Dashboard',
+        meta: { title: 'Dashboard', icon: 'dashboard', affix: true },
       },
     ],
   },

@@ -1,14 +1,57 @@
 <!--
  * @Author: your name
  * @Date: 2022-04-16 10:32:51
- * @LastEditTime: 2022-04-16 11:10:11
+ * @LastEditTime: 2022-04-18 11:28:08
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: \v3-ts-tourdeer\src\layout\components\Navbar.vue
 -->
 <template>
-  <div class="navbar"></div>
+  <div class="navbar">
+    <hamburger
+      id="hamburger-container"
+      :is-active="sidebar.opened"
+      class="hamburger-container"
+      @toggleClick="toggleSideBar"
+    />
+    <div class="right-menu">
+      <search style="width: 1em" class="right-menu-item hover-effect" />
+      <FullScreen style="width: 1em" class="right-menu-item hover-effect" />
+
+      <el-dropdown class="avatar-container right-menu-item hover-effect" trigger="hover">
+        <div class="avatar-wrapper">
+          <img src="@/assets/images/helmet.jpeg" class="user-avatar" />
+        </div>
+        <template v-slot:dropdown>
+          <el-dropdown-menu>
+            <router-link to="/juejin/index">
+              <el-dropdown-item>掘金</el-dropdown-item>
+            </router-link>
+            <a target="_blank" href="https://github.com/PanJiaChen/vue-element-admin/">
+              <el-dropdown-item>Github</el-dropdown-item>
+            </a>
+            <a target="_blank" href="https://panjiachen.github.io/vue-element-admin-site/#/">
+              <el-dropdown-item>Docs</el-dropdown-item>
+            </a>
+            <el-dropdown-item divided>
+              <span style="display: block">Log Out</span>
+            </el-dropdown-item>
+          </el-dropdown-menu>
+        </template>
+      </el-dropdown>
+    </div>
+  </div>
 </template>
+<script lang="ts" setup>
+import Hamburger from '@/components/Hamburger';
+import { useAppStore } from '@/store';
+import { storeToRefs } from 'pinia';
+const appStore = useAppStore();
+const { sidebar } = storeToRefs(appStore);
+function toggleSideBar() {
+  appStore.toggleSideBar();
+}
+</script>
 <style lang="scss" scoped>
 .navbar {
   height: 50px;

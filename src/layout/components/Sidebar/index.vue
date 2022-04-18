@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2022-04-14 10:29:56
- * @LastEditTime: 2022-04-16 17:02:03
+ * @LastEditTime: 2022-04-18 11:37:07
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: \v3-ts-tourdeer\src\layout\components\Sidebar\index.vue
@@ -11,49 +11,39 @@
     <logo v-if="showLogo" />
     <el-scrollbar wrap-class="scrollbar-wrapper">
       <el-menu
-        default-active="2"
+        default-active="1"
         class="el-menu-vertical-demo"
         :collapse="isCollapse"
         @open="handleOpen"
         @close="handleClose"
       >
-        <el-sub-menu index="1">
+        <el-menu-item index="1">
+          <el-icon>
+            <document />
+          </el-icon>
+          <template #title>Dashboard</template>
+        </el-menu-item>
+        <el-sub-menu index="2">
           <template #title>
             <el-icon>
-              <location />
+              <icon-menu />
             </el-icon>
-            <span>Navigator One</span>
+            <span>Guide</span>
           </template>
-          <el-menu-item-group>
-            <template #title><span>Group One</span></template>
-            <el-menu-item index="1-1" @click="goPage()">item one</el-menu-item>
-            <el-menu-item index="1-2">item two</el-menu-item>
-          </el-menu-item-group>
-          <el-menu-item-group title="Group Two">
-            <el-menu-item index="1-3">item three</el-menu-item>
-          </el-menu-item-group>
-          <el-sub-menu index="1-4">
-            <template #title><span>item four</span></template>
-            <el-menu-item index="1-4-1">item one</el-menu-item>
-          </el-sub-menu>
+          <el-menu-item index="1-1" @click="goPage()">掘金</el-menu-item>
+          <el-menu-item index="1-2">item two</el-menu-item>
         </el-sub-menu>
-        <el-menu-item index="2">
-          <el-icon>
-            <icon-menu />
-          </el-icon>
-          <template #title>Navigator Two</template>
-        </el-menu-item>
         <el-menu-item index="3" disabled>
           <el-icon>
             <document />
           </el-icon>
-          <template #title>Navigator Three</template>
+          <template #title>Documentation</template>
         </el-menu-item>
         <el-menu-item index="4">
           <el-icon>
             <setting />
           </el-icon>
-          <template #title>Navigator Four</template>
+          <template #title>Settings</template>
         </el-menu-item>
       </el-menu>
       <el-menu :default-active="activeMenu" :collapse="isCollapse" :unique-opened="false"> </el-menu>
@@ -61,23 +51,30 @@
   </div>
 </template>
 <script lang="ts" setup>
-import { ref, computed } from 'vue';
+import { computed } from 'vue';
 import { Menu as IconMenu, Setting } from '@element-plus/icons-vue';
 import Logo from './Logo';
 
-import { useSettingsStore } from '@/store';
+import { useSettingsStore, useAppStore } from '@/store';
 import { useRouter } from 'vue-router';
 
+/**
+ * 展示logo
+ */
 const settingsState = useSettingsStore();
 const showLogo = computed(() => {
-  return settingsState.showLogo;
+  return settingsState.sidebarLogo;
 });
 
 const activeMenu: any = computed(() => {
   return '1';
 });
 
-const isCollapse = ref(false);
+//可折叠的菜单
+const appStore = useAppStore();
+const isCollapse = computed(() => {
+  return !appStore.sidebar.opened;
+});
 const handleOpen = (key: string, keyPath: string[]) => {
   console.log(key, keyPath);
 };

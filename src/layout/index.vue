@@ -1,13 +1,13 @@
 <!--
  * @Author: your name
  * @Date: 2022-04-13 15:09:29
- * @LastEditTime: 2022-04-16 11:09:55
+ * @LastEditTime: 2022-04-18 11:46:53
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: \v3-ts-tourdeer\src\layout\index.vue
 -->
 <template>
-  <div class="app-wrapper">
+  <div :class="classObj" class="app-wrapper">
     <Sidebar class="sidebar-container" />
     <div :class="{ hasTagsView: needTagsView }" class="main-container">
       <div>
@@ -25,11 +25,18 @@ import NavBar from './components/NavBar';
 import TagsView from './components/TagsView';
 // import { AppMain, Sidebar, NavBar } from './components';
 
-import { useSettingsStore } from '@/store';
+import { useSettingsStore, useAppStore } from '@/store';
 import { computed } from '@vue/reactivity';
 const settingsStore = useSettingsStore();
 const needTagsView = computed(() => {
   return settingsStore.tagsView;
+});
+
+const appStore = useAppStore();
+const classObj = computed(() => {
+  return {
+    hideSidebar: !appStore.sidebar.opened,
+  };
 });
 </script>
 <style lang="scss" scoped>
@@ -45,5 +52,9 @@ const needTagsView = computed(() => {
     position: fixed;
     top: 0;
   }
+}
+
+.hideSidebar .fixed-header {
+  width: calc(100% - 54px);
 }
 </style>
