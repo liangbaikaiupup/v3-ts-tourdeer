@@ -1,17 +1,23 @@
 /*
  * @Author: your name
  * @Date: 2022-03-19 13:58:13
- * @LastEditTime: 2022-03-31 08:47:23
+ * @LastEditTime: 2022-04-20 10:38:34
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: \v3-ts-tourdeer\vue.config.js
  */
 const { defineConfig } = require('@vue/cli-service');
+
 module.exports = defineConfig({
   publicPath: './',
   transpileDependencies: true,
-
+  configureWebpack: {
+    resolve: {
+      fallback: { path: require.resolve('path-browserify') },
+    },
+  },
   devServer: {
+    port: 9528,
     proxy: {
       '/': {
         target: 'https://music-two-gamma.vercel.app/',

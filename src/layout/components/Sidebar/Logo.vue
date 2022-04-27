@@ -1,13 +1,13 @@
 <!--
  * @Author: your name
  * @Date: 2022-04-16 16:06:56
- * @LastEditTime: 2022-04-16 16:23:03
+ * @LastEditTime: 2022-04-26 14:35:58
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: \v3-ts-tourdeer\src\layout\components\Sidebar\Logo.vue
 -->
 <template>
-  <div class="sidebar-logo-container">
+  <div class="sidebar-logo-container" :class="{ collapse: collapse }">
     <transition name="sidebarLogoFade">
       <div class="sidebar-logo-link">
         <img :src="logo" class="sidebar-logo" />
@@ -18,9 +18,15 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue';
+import { ref, defineProps } from 'vue';
 const title = ref('VUE-TOURING_DEER');
 const logo = ref('https://wpimg.wallstcn.com/69a1c46c-eb1c-4b46-8bd4-e9e686ef5251.png');
+defineProps({
+  collapse: {
+    type: Boolean,
+    default: true,
+  },
+});
 </script>
 
 <style lang="scss" scoped>
@@ -38,7 +44,7 @@ const logo = ref('https://wpimg.wallstcn.com/69a1c46c-eb1c-4b46-8bd4-e9e686ef525
   width: 100%;
   height: 50px;
   line-height: 50px;
-  // background: #2b2f3a;
+  background: #2b2f3a;
   text-align: center;
   overflow: hidden;
 
@@ -56,7 +62,7 @@ const logo = ref('https://wpimg.wallstcn.com/69a1c46c-eb1c-4b46-8bd4-e9e686ef525
     & .sidebar-title {
       display: inline-block;
       margin: 0;
-      // color: #fff;
+      color: #fff;
       font-weight: 600;
       line-height: 50px;
       font-size: 14px;
