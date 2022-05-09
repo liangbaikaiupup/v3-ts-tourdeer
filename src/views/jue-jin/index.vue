@@ -1,8 +1,8 @@
 <!--
  * @Author: your name
  * @Date: 2022-04-13 13:38:48
- * @LastEditTime: 2022-04-16 11:14:54
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2022-05-09 16:43:58
+ * @LastEditors: xianglutao 294301492@qq.com
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: \v3-ts-tourdeer\src\views\jue-jin\index.vue
 -->
@@ -20,12 +20,11 @@
   </div>
 </template>
 <script lang="ts" setup>
-import { onMounted } from 'vue';
-import { useRoute } from 'vue-router';
+// import { onMounted } from 'vue';
+// import { useRoute } from 'vue-router';
 
-const route = useRoute();
-onMounted(() => {
-  console.log(7731, route.params);
-  console.log(7732, route.query);
-});
+// const route = useRoute();
+// onMounted(() => {
+
+// });
 </script>
